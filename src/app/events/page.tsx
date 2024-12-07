@@ -1,0 +1,29 @@
+'use client'
+
+import ActionBar from '../dashboard/components/ActionBar'
+import EventCard from '@/components/event/EventCard'
+import FilterBar from '../dashboard/components/FilterBar'
+import MainHeader from '../dashboard/components/MainHeader'
+import { useEvent } from '@/hooks/useEvent'
+
+const EventsPage = () => {
+    const { events }: any = useEvent()
+
+    return (
+        <div className="full-page   flex-col    ">
+            <MainHeader label="Book Events" />
+            <div className="flex flex-col items-center justify-center">
+                <div className="w-5/6 py-8 ">
+                    <FilterBar />
+                </div>
+                <div className="w-5/6  grid grid-cols-3 gap-8">
+                    {events.map((event: any) => (
+                        <EventCard event={event} key={event.id} />
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default EventsPage
