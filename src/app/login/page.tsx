@@ -2,7 +2,7 @@
 
 import { Button } from '@nextui-org/react'
 import Loading from '@/components/shared/Loading'
-import { useAuth } from '@/context/AuthContext'
+import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 
 const AuthPage = () => {

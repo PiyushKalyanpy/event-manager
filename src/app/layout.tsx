@@ -4,6 +4,7 @@ import { JetBrains_Mono, Manrope } from 'next/font/google'
 
 import type { Metadata } from 'next'
 import { Providers } from './providers'
+import { Suspense } from 'react'
 import { ToastContainer } from 'react-toast'
 import localFont from 'next/font/local'
 
@@ -98,7 +99,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${font.className} dark antialiased `}>
-                <Providers>{children}</Providers>
+                <Suspense>
+                    <Providers>{children}</Providers>
+                </Suspense>
             </body>
         </html>
     )

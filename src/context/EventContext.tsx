@@ -67,6 +67,8 @@ export default function EventContextProvider({ children }: any) {
         }
     }
 
+
+
     useEffect(() => {
         if (events.length === 0) {
             console.log('✅ getting events')

@@ -83,10 +83,11 @@ nextjs-portal {
 }
 @layer base {
     * {
-        @apply border-border;
+        @apply  border-border m-0;
+      
     }
     body {
-        @apply bg-background text-foreground;
+        @apply bg-background border-border text-foreground m-0 overflow-x-hidden;
     }
     .page-wrapper {
         @apply w-screen min-h-screen justify-center items-center flex;
@@ -138,3 +139,14 @@ nextjs-portal {
 ::-webkit-scrollbar-thumb:hover {
     background-color: #000000;
 }
+
+
+.razorpay-checkout-frame{
+    background-color: rebeccapurple;
+    @apply light
+}
+
+.toastContainer{
+ @apply z-20 shadow-2xl shadow-black
+}
+ 

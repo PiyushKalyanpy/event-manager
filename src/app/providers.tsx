@@ -3,6 +3,7 @@
 import AuthContextProvider from '@/context/AuthContext'
 import EventContextProvider from '@/context/EventContext'
 import { NextUIProvider } from '@nextui-org/react'
+import { TicketProvider } from '@/context/TicketContext'
 import { ToastContainer } from 'react-toast'
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -10,7 +11,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <NextUIProvider>
             <ToastContainer delay={2000} position="bottom-left" />
             <AuthContextProvider>
-                <EventContextProvider>{children}</EventContextProvider>
+                <EventContextProvider>
+                    <TicketProvider>
+                    {children}
+                    </TicketProvider>
+                </EventContextProvider>
             </AuthContextProvider>
         </NextUIProvider>
     )

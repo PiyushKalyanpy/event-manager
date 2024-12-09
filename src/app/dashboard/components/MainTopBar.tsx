@@ -1,7 +1,7 @@
 import { Avatar, NavbarMenuToggle } from '@nextui-org/react'
 import { Bell, User } from 'lucide-react'
 
-import AvatarDropdown from '@/app/dashboard/components/AvatarDropdown'
+import AvatarDropdown from '@/components/shared/AvatarDropdown'
 import GoLive from '@/components/shared/GoLive'
 import IconWithBorder from '@/components/shared/IconWithBorder'
 import { SidebarTrigger } from '@/components/ui/sidebar'

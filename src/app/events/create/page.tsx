@@ -11,6 +11,8 @@ import {
 
 import MainHeader from '@/app/dashboard/components/MainHeader'
 import { Status } from '@/utils'
+import { Time } from '@internationalized/date'
+import { TimeInput } from '@nextui-org/react'
 import { handleError } from '@/utils/errorHandler'
 import { toast } from 'react-toast'
 import { useAuth } from '@/hooks/useAuth'
@@ -26,6 +28,11 @@ const CreateEvent = () => {
         venue: '',
         status: Status.UPCOMING,
         isLive: false,
+        time : {
+            hour: null,
+            minute: null,
+            
+        },
         tickets: {
             sold: null,
             capacity: null,
@@ -89,7 +96,6 @@ const CreateEvent = () => {
                             name: user.displayName,
                             photoURL: user.photoURL,
                             email: user.email,
-                            ...prevEvent.organiser,
                         },
                         createdAt: new Date().toISOString(),
                         updatedAt: new Date().toISOString(),
@@ -104,12 +110,23 @@ const CreateEvent = () => {
         }
         setIsLoading(false)
     }
+    console.log(event)
 
     return (
         <div className="min-h-screen justify-center w-screen flex p-4">
             <div className="w-1/2 rounded-3xl overflow-hidden bg-sidebar border m-2">
                 <MainHeader label="Create Event" />
+                <div className="flex flex-wrap gap-4">
+                    
+                </div>
                 <form className="flex flex-col gap-4 p-4">
+                <TimeInput
+                        label="Event Time"
+                        // onChange={(e) => {
+                        //     handleNestedChange('time', 'hour', e.hour)
+                        //     handleNestedChange('time', 'minute', e.minute)
+                        // }}
+                    />
                     <Image
                         src={
                             image
@@ -177,10 +194,24 @@ const CreateEvent = () => {
                         onChange={(e) => handleChange('date', e.target.value)}
                     />{' '}
                     <Input
+                        type="text"
+                        label="Category"
+                        value={event.category}
+                        onChange={(e) =>
+                            handleChange('category', e.target.value)
+                        }
+                    />{' '}
+                    <Input
                         type="time"
                         label="Time"
-                        value={event.time}
-                        onChange={(e) => handleChange('time', e.target.value)}
+                        value={
+                            event.time
+                                ? event.time.toISOString().slice(0, 16)
+                                : ''
+                        }
+                        onChange={(e) =>
+                            handleChange('time', new Date(e.target.value))
+                        }
                     />
                     <Input
                         type="text"
@@ -235,5 +266,4 @@ const CreateEvent = () => {
         </div>
     )
 }
-
 export default CreateEvent

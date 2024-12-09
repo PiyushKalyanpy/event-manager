@@ -8,7 +8,7 @@ const GoLive = () => {
 
     return (
         <div>
-            <div className="flex items-center space-x-2 border p-3  rounded-3xl">
+            <div className="flex items-center space-x-2 border px-4 py-2  rounded-3xl">
                 {isLive ? (
                     <div className="flex  relative w-4 h-4 ">
                         <div className="w-4 absolute animate-ping h-4 bg-red-600 rounded-full shadow-xl shadow-red-500/50" />
