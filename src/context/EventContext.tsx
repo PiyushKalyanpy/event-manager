@@ -11,7 +11,7 @@ import { handleError } from '@/utils/errorHandler'
 import { toast } from 'react-toast'
 import { useAuth } from '@/hooks/useAuth'
 
-export const EventContext = createContext<EventContextType | null>(null)
+export const EventContext = createContext<any | null>(null)
 
 export default function EventContextProvider({ children }: any) {
     const [events, setEvents] = useState<Event[]>([])
@@ -67,7 +67,17 @@ export default function EventContextProvider({ children }: any) {
         }
     }
 
-
+    const getEventById = (id: string) => {
+        // if found in local then return , else fetch from firebase
+        const event = events.find((event) => event.id === id)
+        if (event) {
+            return event
+        } else {
+            console.log('✅ fetching event')
+            return null
+        }
+    }
+    
 
     useEffect(() => {
         if (events.length === 0) {
@@ -82,6 +92,7 @@ export default function EventContextProvider({ children }: any) {
                 events,
                 createEvent,
                 // updateEvent,
+                getEventById,
                 // deleteEvent,
             }}
         >
