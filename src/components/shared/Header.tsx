@@ -11,7 +11,7 @@ const Header = () => {
             <h1 className="text-2xl cursor-pointer ">
                 <Link href={'/'}>Smart Events</Link>
             </h1>
-            <nav className="md:flex gap-4 hidden ">
+            <nav className="hidden md:flex  gap-4   ">
                 <Link href={'/'}>Home</Link>
                 <Link href={'/events'}>Events</Link>
                 <Link href={'/about'}>About</Link>

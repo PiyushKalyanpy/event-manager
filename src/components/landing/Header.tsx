@@ -12,7 +12,7 @@ const Header = () => {
                 alt="logo"
                 className="w-16  "
             />
-            <nav className="py-2 px-4 rounded-full flex gap-12  bg-neutral-700/30 border border-neutral-800">
+            <nav className="py-2 px-4 hidden  rounded-full md:flex gap-12  bg-neutral-700/30 border border-neutral-800">
                 {navLinks.map((link, index) => (
                     <Link
                         key={index}
