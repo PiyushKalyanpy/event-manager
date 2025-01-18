@@ -68,23 +68,22 @@ export const TicketProvider = ({ children }: any) => {
 
     const getTickets = async (user: any) => {
         if (user) {
-            console.log('Setting up real-time listener');
+            console.log('Setting up real-time listener')
             const q = query(
                 collection(db, 'tickets'),
                 where('userId', '==', user.uid)
-            );
+            )
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
-                const tickets = querySnapshot.docs.map((doc) => doc.data());
-                console.log("Current tickets: ", tickets);
-                setTickets(tickets); // Assuming setTickets updates the UI state
-            }); 
-    
-            return unsubscribe; // Return the unsubscribe function if you need to stop listening later
-        }
-    };
-    
+                const tickets = querySnapshot.docs.map((doc) => doc.data())
+                console.log('Current tickets: ', tickets)
+                setTickets(tickets) // Assuming setTickets updates the UI state
+            })
 
-    const scannedTicket = async (secureCode: any ) => {
+            return unsubscribe // Return the unsubscribe function if you need to stop listening later
+        }
+    }
+
+    const scannedTicket = async (secureCode: any) => {
         const q = query(
             collection(db, 'tickets'),
             where('secureCode', '==', secureCode)
@@ -98,7 +97,7 @@ export const TicketProvider = ({ children }: any) => {
             const ticketRef = doc(db, 'tickets', ticket.id)
             const batch = writeBatch(db)
             batch.update(ticketRef, { status: 'Scanned' })
-            batch.update(ticketRef, { scannedAt: Timestamp.now()  })
+            batch.update(ticketRef, { scannedAt: Timestamp.now() })
             await batch.commit()
             toast.success('Ticket not found')
         } else {

@@ -1,7 +1,7 @@
-'use client';
+'use client'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { BadgeCheck, Bell, CreditCard, LogOut, Sparkles } from 'lucide-react';
+import { BadgeCheck, Bell, CreditCard, LogOut, Sparkles } from 'lucide-react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,7 +11,11 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import {
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/sidebar'
 
 import { useAuth } from '@/hooks/useAuth'
 

@@ -1,10 +1,9 @@
-'use client';
+'use client'
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react'
 
 import { BrowserMultiFormatReader } from '@zxing/library'
 import { Button } from '@nextui-org/react'
-import Camera from './phoneperm'
 import { useTicket } from '@/hooks/useTicket'
 
 const BarcodeScanner = () => {
@@ -91,15 +90,13 @@ const BarcodeScanner = () => {
             setScanning(true)
         }
     }
- 
 
-  
     return (
         <div>
             <div>
                 {/* Button to start scanning */}
                 <Button onClick={handleClick}>Start Scanning</Button>
-           
+
                 {/* Show permission prompt message if not yet granted */}
                 {!hasPermission && !permissionRequested && (
                     <div>

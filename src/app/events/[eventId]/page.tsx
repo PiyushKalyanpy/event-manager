@@ -26,13 +26,12 @@ const Page = ({ params }: any) => {
     if (!currentEvent) {
         return <div>Not Found !</div>
     }
-    if(!user) {
+    if (!user) {
         router.push('/login')
     }
 
     return (
         <div className=" bg-black rounded-3xl w-screen flex justify-center p-4  md:p-8 min-h-screen">
-           
             <div className=" w-full md:w-3/4 flex flex-col gap-5  ">
                 <Image
                     alt="df"
@@ -108,52 +107,58 @@ const Page = ({ params }: any) => {
                     {/* booking */}
                     <div className=" bg-neutral-900/70 rounded-2xl sticky top-20 w-full md:w-1/4 flex flex-col gap-4 p-4 h-fit ">
                         <h2 className="text-1xl font-bold ">Buy Ticket </h2>
-                       {
-                        currentEvent.price.general && currentEvent.price.vip   === '0' ? (
+                        {currentEvent.price.general &&
+                        currentEvent.price.vip === '0' ? (
                             <div>
-                                  <p className="text-2xl  flex gap-2 items-center font-bold text-green-400">
-                                       <PercentageBadge/><p> FREE</p>
-                                    </p>
+                                <p className="text-2xl  flex gap-2 items-center font-bold text-green-400">
+                                    <PercentageBadge />
+                                    <p> FREE</p>
+                                </p>
                             </div>
                         ) : (
                             <div className="flex  w-full justify-between">
-                            <div className="flex flex-col items-center w-fit ">
-                                <div className="flex gap-2 ">
-                                    <p className="text-2xl font-serif  font-semibold  text-yellow-300">
-                                        ₹
-                                    </p>
-                                    <p className="text-2xl  font-bold text-yellow-300">
-                                        {currentEvent.price.general}
-                                    </p>
-                                </div>
-                                <p className="text-sm py-1 text-neutral-400 ">
-                                    general
-                                </p>
-                            </div>
-                            <Divider orientation="vertical" className="h-10" />
-                            <div className="flex flex-col items-center w-fit ">
-                                <div className="flex gap-2 ">
-                                    <p className="text-2xl font-serif    ">₹</p>
-                                    <p className="text-2xl   text-white  ">
-                                        {currentEvent.price.vip}
+                                <div className="flex flex-col items-center w-fit ">
+                                    <div className="flex gap-2 ">
+                                        <p className="text-2xl font-serif  font-semibold  text-yellow-300">
+                                            ₹
+                                        </p>
+                                        <p className="text-2xl  font-bold text-yellow-300">
+                                            {currentEvent.price.general}
+                                        </p>
+                                    </div>
+                                    <p className="text-sm py-1 text-neutral-400 ">
+                                        general
                                     </p>
                                 </div>
-                                <p className="text-sm py-1 text-neutral-400 ">
-                                    vip
-                                </p>
+                                <Divider
+                                    orientation="vertical"
+                                    className="h-10"
+                                />
+                                <div className="flex flex-col items-center w-fit ">
+                                    <div className="flex gap-2 ">
+                                        <p className="text-2xl font-serif    ">
+                                            ₹
+                                        </p>
+                                        <p className="text-2xl   text-white  ">
+                                            {currentEvent.price.vip}
+                                        </p>
+                                    </div>
+                                    <p className="text-sm py-1 text-neutral-400 ">
+                                        vip
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        )
-                       }
-                      {user &&     <PaymentButton
-                            event={currentEvent}
-                            user={user}
-                            color="secondary"
-                            amount={parseInt(currentEvent.price.general)}
-                            ticketType="General"
-                        />}
+                        )}
+                        {user && (
+                            <PaymentButton
+                                event={currentEvent}
+                                user={user}
+                                color="secondary"
+                                amount={parseInt(currentEvent.price.general)}
+                                ticketType="General"
+                            />
+                        )}
                     </div>
-                 
                 </div>
             </div>
         </div>

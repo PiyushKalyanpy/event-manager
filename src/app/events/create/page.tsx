@@ -28,10 +28,9 @@ const CreateEvent = () => {
         venue: '',
         status: Status.UPCOMING,
         isLive: false,
-        time : {
+        time: {
             hour: null,
             minute: null,
-            
         },
         tickets: {
             sold: null,
@@ -116,11 +115,9 @@ const CreateEvent = () => {
         <div className="min-h-screen justify-center w-screen flex p-4">
             <div className="w-1/2 rounded-3xl overflow-hidden bg-sidebar border m-2">
                 <MainHeader label="Create Event" />
-                <div className="flex flex-wrap gap-4">
-                    
-                </div>
+                <div className="flex flex-wrap gap-4"></div>
                 <form className="flex flex-col gap-4 p-4">
-                <TimeInput
+                    <TimeInput
                         label="Event Time"
                         // onChange={(e) => {
                         //     handleNestedChange('time', 'hour', e.hour)
@@ -204,11 +201,7 @@ const CreateEvent = () => {
                     <Input
                         type="time"
                         label="Time"
-                        value={
-                            event.time
-                                ? event.time.toISOString().slice(0, 16)
-                                : ''
-                        }
+                        value={event.time}
                         onChange={(e) =>
                             handleChange('time', new Date(e.target.value))
                         }

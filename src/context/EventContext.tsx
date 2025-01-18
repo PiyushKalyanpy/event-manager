@@ -77,7 +77,6 @@ export default function EventContextProvider({ children }: any) {
             return null
         }
     }
-    
 
     useEffect(() => {
         if (events.length === 0) {

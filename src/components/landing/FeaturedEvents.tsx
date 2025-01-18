@@ -8,7 +8,6 @@ import Image from 'next/image'
 const FeaturedEvents = (event: any) => {
     const { name, time, venue, imageURL, date } = event.event
 
-
     const targetDate = new Date(createDateObject(time, date)) // Set your event date and time here
     const [timeLeft, setTimeLeft] = useState({
         days: 0,
@@ -138,10 +137,10 @@ const FeaturedEvents = (event: any) => {
 
 export default FeaturedEvents
 
-function createDateObject(time : any, date:any) {
-  const [hours, minutes] = time.split(':');
-  const [year, month, day] = date.split('-');
+function createDateObject(time: any, date: any) {
+    const [hours, minutes] = time.split(':')
+    const [year, month, day] = date.split('-')
 
-  // Create a Date object using the provided year, month, day, hours, and minutes
-  return new Date(year, month - 1, day, hours, minutes);  // month is 0-indexed in JavaScript
+    // Create a Date object using the provided year, month, day, hours, and minutes
+    return new Date(year, month - 1, day, hours, minutes) // month is 0-indexed in JavaScript
 }

@@ -11,22 +11,24 @@ const EventSidebarHeader = () => {
     console.log(event)
     if (!event) return null
     return (
-        <div className='p-2  bg-neutral-950'>
-            <SidebarHeader className=''>
-                <div className='flex gap-4 items-center'>
-                <Image
-                    src={`${event.imageURL}`}
-                    width={50}
-                    height={50}
-                    alt="logo"
-                    className="object-cover rounded-xl"
-                />
-                <div className="flex flex-col">
-                    <h1 className="text-white text-ellipsis line-clamp-1 font-bold">
-                        {event.name}
-                    </h1>
-                    <p className="text-white text-sm text-ellipsis line-clamp-1">{event.venue}</p>
-                </div>
+        <div className="p-2  bg-neutral-950">
+            <SidebarHeader className="">
+                <div className="flex gap-4 items-center">
+                    <Image
+                        src={`${event.imageURL}`}
+                        width={50}
+                        height={50}
+                        alt="logo"
+                        className="object-cover rounded-xl"
+                    />
+                    <div className="flex flex-col">
+                        <h1 className="text-white text-ellipsis line-clamp-1 font-bold">
+                            {event.name}
+                        </h1>
+                        <p className="text-white text-sm text-ellipsis line-clamp-1">
+                            {event.venue}
+                        </p>
+                    </div>
                 </div>
             </SidebarHeader>
         </div>

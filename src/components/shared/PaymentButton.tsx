@@ -10,7 +10,13 @@ declare global {
     }
 }
 
-const PaymentButton = ({ event, user, amount, color = 'primary', ticketType }: any) => {
+const PaymentButton = ({
+    event,
+    user,
+    amount,
+    color = 'primary',
+    ticketType,
+}: any) => {
     const [isProcessing, setISProcessing] = useState(false)
     const { purchaseTicket }: any = useTicket()
 
@@ -35,7 +41,13 @@ const PaymentButton = ({ event, user, amount, color = 'primary', ticketType }: a
                 handler: function (response: any) {
                     console.log('Payment successful', response)
                     try {
-                        purchaseTicket(event, user, amount,ticketType, response)
+                        purchaseTicket(
+                            event,
+                            user,
+                            amount,
+                            ticketType,
+                            response
+                        )
                         toast.success('You have successfully purchased ticket')
                     } catch {
                         toast.error('Error buying this ticket')
@@ -59,14 +71,14 @@ const PaymentButton = ({ event, user, amount, color = 'primary', ticketType }: a
         }
     }
     return (
-        <div className='bg-black'>
+        <div className="bg-black">
             <Script src="https://checkout.razorpay.com/v1/checkout.js" />
 
             <Button
                 className="w-full"
-                color='primary'
+                color="primary"
                 onClick={() => {
-                  handlePayment()
+                    handlePayment()
                 }}
                 disabled={isProcessing}
             >

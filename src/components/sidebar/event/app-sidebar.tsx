@@ -1,8 +1,14 @@
-import { Sidebar, SidebarFooter, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import {
+    Sidebar,
+    SidebarFooter,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/sidebar'
 
 import EventSidebarHeader from './header-sidebar'
 import GlobalSidebarContent from './content-sidebar.tsx/content-sidebar'
-import { eventSidebarItems } from '@/constants';
+import { eventSidebarItems } from '@/constants'
 
 export function AppSidebar() {
     return (

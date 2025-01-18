@@ -21,7 +21,6 @@ const Test = () => {
             setMessage(msg)
             console.log(msg)
         })
-       
     }, [socket])
 
     return (

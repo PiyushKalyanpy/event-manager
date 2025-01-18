@@ -18,10 +18,10 @@ const MyPurchasedEvents = () => {
     console.log('tickets', tickets)
 
     useEffect(() => {
-      if (tickets.length <1) {
-        console.log('getting docs ')
-        getTickets(user)
-        console.log("tickets", tickets)
+        if (tickets.length < 1) {
+            console.log('getting docs ')
+            getTickets(user)
+            console.log('tickets', tickets)
         }
     }, [user])
 
@@ -30,19 +30,17 @@ const MyPurchasedEvents = () => {
             <div className="mb-6 flex justify-between items-center    ">
                 <p className="text-2xl ">My Tickets</p>
             </div>
-        
+
             <div className="grid md:grid-cols-2   gap-16 grid-cols-1 lg:grid-cols-2">
                 {tickets != undefined &&
                     tickets.map((item: any) => {
                         return (
                             <div key={item.ename}>
-                                <Ticket  item={item} />
+                                <Ticket item={item} />
                             </div>
                         )
                     })}
-                   
             </div>
-            
         </div>
     )
 }

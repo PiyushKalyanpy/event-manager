@@ -13,10 +13,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
             <ToastContainer delay={2000} position="bottom-left" />
             <AuthContextProvider>
                 <EventContextProvider>
-                   <TicketProvider>
-                    {children}
-                    </TicketProvider>
-                </EventContextProvider> 
+                    <TicketProvider>{children}</TicketProvider>
+                </EventContextProvider>
             </AuthContextProvider>
         </NextUIProvider>
     )

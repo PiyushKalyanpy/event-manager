@@ -4,7 +4,7 @@ import { Button } from '@nextui-org/react'
 
 const HeroSection = () => {
     return (
-         <div className="w-screen overflow-hidden flex items-center h-screen justify-center -mt-10">
+        <div className="w-screen overflow-hidden flex items-center h-screen justify-center -mt-10">
             <div className="w-1/2 items-center h-full  justify-center flex gap-8 flex-col text-center">
                 <h1 className="flex text-3xl font-bold ">
                     Revolutionize Your Event Management

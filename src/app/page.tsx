@@ -33,8 +33,8 @@ export default function Home() {
             {events && <FeaturedEvents event={events[0]} />}
             <Stats />
             <Features />
-            <Pricing/>
-            <Footer/>
+            <Pricing />
+            <Footer />
         </div>
     )
 }

@@ -99,18 +99,14 @@ const Ticket = ({ item }: any) => {
 function convertTimestampToDate(timestamp: any) {
     const { seconds, nanoseconds } = timestamp
 
-    
     const date = new Date(seconds * 1000 + Math.floor(nanoseconds / 1e6))
 
-    
-    return date.toISOString() 
+    return date.toISOString()
 }
 
 function formatDateTime(timestamp: any) {
-    
     const date = new Date(timestamp)
 
-    
     const options = {
         day: '2-digit',
         month: 'short',
@@ -120,7 +116,6 @@ function formatDateTime(timestamp: any) {
         hour12: true,
     }
 
-    
     const formattedDate = date.toLocaleDateString('en-GB').replace(',', ' ·')
     return formattedDate
 }

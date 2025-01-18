@@ -7,7 +7,7 @@ import { Plus } from 'lucide-react'
 import { useEvent } from '@/hooks/useEvent'
 
 const DashboardEventPage = () => {
-    const {events} : any = useEvent()
+    const { events }: any = useEvent()
     console.log(events)
     return (
         <div>

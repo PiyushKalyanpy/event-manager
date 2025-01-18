@@ -24,7 +24,9 @@ const GlobalSidebarContent = () => {
                         {eventSidebarItems.content.map((item) => (
                             <SidebarMenuItem key={item.title}>
                                 <SidebarMenuButton asChild>
-                                    <a href={`/${eventid}/studio?p=${item.url.split('/').pop()}`}>
+                                    <a
+                                        href={`/${eventid}/studio?p=${item.url.split('/').pop()}`}
+                                    >
                                         <item.icon />
                                         <span>{item.title}</span>
                                     </a>
