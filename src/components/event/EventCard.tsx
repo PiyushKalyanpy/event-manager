@@ -13,9 +13,12 @@ import { usePathname, useRouter } from 'next/navigation'
 import EventStatus from './EventStatus'
 import IconWithValue from './IconWithValue'
 import Image from 'next/image'
+import LiveBlink from '../icons/LiveBlink'
+import { useAuth } from '@/hooks/useAuth'
 
 const EventCard = (event: any) => {
-    const {id, name, date, time, venue, status, imageURL, price } = event.event
+    const { id, name, date, time, venue, status, imageURL, price } = event.event
+    const { user }: any = useAuth()
 
     const path = usePathname()
     const isEventPage = path.includes('events')
@@ -38,7 +41,10 @@ const EventCard = (event: any) => {
                     />
                 </CardHeader>
                 <CardBody className=" flex gap-4 ">
-                    <EventStatus statusType={status} />
+                    <div className="flex gap-4  items-center">
+                        {status === 'Ongoing' && <LiveBlink />}
+                        <EventStatus statusType={status} />
+                    </div>
                     <h3 className="text-xl pt-4 text-ellipsis line-clamp-1 font-bold">
                         {name}{' '}
                     </h3>
@@ -59,49 +65,47 @@ const EventCard = (event: any) => {
                 </CardBody>
                 {/* show price in card footer */}
 
-                <CardFooter className=" border-t  ">
-                    <div className="flex justify-between w-full">
-                        <div>
-                            <div className="flex gap-2">
-                                <p className="text-lg font-serif  ">₹</p>
-                                <p className="text-lg  ">{price.vip}</p>
-                            </div>
-                            <p className="text-sm py-1 text-neutral-400 ">
-                                vip
-                            </p>
-                        </div>
-
-                        <div>
-                            <div className="flex gap-2">
-                                <p className="text-lg font-serif   text-yellow-300">
-                                    ₹
-                                </p>
-                                <p className="text-lg  font-bold text-yellow-300">
-                                    {price.general}
-                                </p>
-                            </div>
-                            <p className="text-sm py-1 text-neutral-400 ">
-                                general
-                            </p>
-                        </div>
-                    </div>
-                </CardFooter>
-
-                {!isEventPage && (
-                    <CardFooter className="  group-hover/item:flex hidden gap-2 absolute   transition duration-800 ease-in-out bottom-0 bg-gradient-to-tr backdrop-blur-sm p-4  from-black from-10% to-transparent to-90% left-0 pt-8 ">
-                        <Button
-                            isIconOnly
-                            variant="light"
-                            className="rounded-full border "
-                            startContent={<Share size={16} />}
-                        />
+                {user && user.isAdmin ? (
+                    <CardFooter className="   gap-2    transition duration-800 ease-in-out bottom-0  backdrop-blur-sm p-4   left-0 pt-8 ">
                         <Button
                             variant="light"
-                            className="rounded-full border "
+                            className="rounded-full w-full border "
                             startContent={<Radio size={16} />}
+                            onClick={() => {
+                                router.refresh()
+                                router.push(`/${id}/studio`)
+                            }}
                         >
                             View in Studio
                         </Button>
+                    </CardFooter>
+                ) : (
+                    <CardFooter className=" border-t  ">
+                        <div className="flex justify-between w-full">
+                            <div>
+                                <div className="flex gap-2">
+                                    <p className="text-lg font-serif  ">₹</p>
+                                    <p className="text-lg  ">{price.vip}</p>
+                                </div>
+                                <p className="text-sm py-1 text-neutral-400 ">
+                                    vip
+                                </p>
+                            </div>
+
+                            <div>
+                                <div className="flex gap-2">
+                                    <p className="text-lg font-serif   text-yellow-300">
+                                        ₹
+                                    </p>
+                                    <p className="text-lg  font-bold text-yellow-300">
+                                        {price.general}
+                                    </p>
+                                </div>
+                                <p className="text-sm py-1 text-neutral-400 ">
+                                    general
+                                </p>
+                            </div>
+                        </div>
                     </CardFooter>
                 )}
             </Card>

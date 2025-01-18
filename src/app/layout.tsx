@@ -1,6 +1,6 @@
 import './globals.css'
 
-import { JetBrains_Mono, Manrope } from 'next/font/google'
+import { Manrope, Space_Grotesk } from 'next/font/google'
 
 import type { Metadata } from 'next'
 import { Providers } from './providers'
@@ -8,7 +8,7 @@ import { Suspense } from 'react'
 import { ToastContainer } from 'react-toast'
 import localFont from 'next/font/local'
 
-const font = JetBrains_Mono({
+const font = Space_Grotesk({
     weight: ['300'],
     subsets: ['latin-ext'],
     variable: '--font-inter',

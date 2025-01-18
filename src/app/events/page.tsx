@@ -16,7 +16,7 @@ const EventsPage = () => {
                 <div className="w-5/6 py-8 ">
                     <FilterBar />
                 </div>
-                <div className="w-5/6  grid grid-cols-3 gap-8">
+                <div className="w-5/6  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {events.map((event: any) => (
                         <EventCard event={event} key={event.id} />
                     ))}
