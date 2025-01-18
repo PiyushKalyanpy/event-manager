@@ -150,3 +150,13 @@ nextjs-portal {
  @apply z-20 shadow-2xl shadow-black
 }
  
+
+tr{
+    padding: 120px !important;
+    border-radius: 20px;
+    overflow: hidden;
+}
+td, th{
+    padding: 24px !important;
+    border: none; 
+}

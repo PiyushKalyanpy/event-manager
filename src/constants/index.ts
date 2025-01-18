@@ -60,7 +60,7 @@ export const eventSidebarItems = {
         },
         {
             title: 'Tickets',
-            url: '/events',
+            url: '/tickets',
             icon: Inbox,
         },
         {

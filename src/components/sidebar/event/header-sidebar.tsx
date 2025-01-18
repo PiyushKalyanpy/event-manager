@@ -8,8 +8,7 @@ const EventSidebarHeader = () => {
     // events from useEVents
     const { events }: any = useEvent()
     const event = events.find((event: any) => event.id === eventid)
-    console.log(event)
-    if (!event) return null
+     if (!event) return null
     return (
         <div className="p-2  bg-neutral-950">
             <SidebarHeader className="">

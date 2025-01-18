@@ -158,6 +158,16 @@ const Page = ({ params }: any) => {
                                 ticketType="General"
                             />
                         )}
+                         {currentEvent.price.vip !== '0' && (
+                            <PaymentButton
+                                event={currentEvent}
+                                user={user}
+                                color="secondary"
+                                amount={parseInt(currentEvent.price.vip)}
+                                ticketType="VIP"
+                            />
+                        )}
+                        
                     </div>
                 </div>
             </div>

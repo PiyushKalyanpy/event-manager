@@ -23,9 +23,10 @@ export const TicketContext = createContext<any | undefined>(undefined)
 
 export const TicketProvider = ({ children }: any) => {
     const [tickets, setTickets] = useState<any>([])
-    const [loading, setLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
-    const uid = new ShortUniqueId({ length: 10 })
+    const [eventTickets, setEventTickets]  = useState<any>([])
+     const uid = new ShortUniqueId({ length: 10 })
 
     const purchaseTicket = async (
         event: any,
@@ -35,7 +36,7 @@ export const TicketProvider = ({ children }: any) => {
         response: any
     ) => {
         try {
-            setLoading(true)
+            setIsLoading(true)
             console.log(event)
             const newId = doc(collection(db, 'ids')).id
             const newTicket: Ticket = {
@@ -62,7 +63,7 @@ export const TicketProvider = ({ children }: any) => {
             console.log(error)
             toast.error('Failed to purchase ticket')
         } finally {
-            setLoading(false)
+            setIsLoading(false)
         }
     }
 
@@ -105,15 +106,32 @@ export const TicketProvider = ({ children }: any) => {
         }
     }
 
+
+    const getTicketByEvent = async (eventid: string) => {
+        setIsLoading(true)
+        try {
+            console.log("Getting Ticket")
+            const snapshots = await getDocs(query(collection(db, 'tickets'), where('eventId', '==', eventid)))
+            const eventData = snapshots.docs.map((item: any) => item?.data())
+            setEventTickets(eventData)
+        } catch (error) {
+            console.error('Error fetching events: ', error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
     return (
         <TicketContext.Provider
             value={{
                 tickets,
-                loading,
+                isLoading,
                 error,
                 purchaseTicket,
                 getTickets,
                 scannedTicket,
+                getTicketByEvent,
+                eventTickets,
             }}
         >
             {children}

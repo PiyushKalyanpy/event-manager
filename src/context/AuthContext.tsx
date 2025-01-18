@@ -23,15 +23,11 @@ export default function AuthContextProvider({ children }: any) {
     useEffect(() => {
         setIsLoading(true)
         async function unsub() {
-            console.log('1')
-            onAuthStateChanged(auth, (user) => {
-                console.log('2')
-
+             onAuthStateChanged(auth, (user) => {
+ 
                 if (user) {
-                    console.log('3')
-                    getUser(user).then((data) => {
-                        console.log('4')
-                        setUser(data)
+                     getUser(user).then((data) => {
+                         setUser(data)
                         setIsLoading(false)
                     })
                 } else {

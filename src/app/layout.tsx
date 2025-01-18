@@ -1,6 +1,6 @@
 import './globals.css'
 
-import { Manrope, Space_Grotesk } from 'next/font/google'
+import { Inter_Tight, Manrope, Space_Grotesk } from 'next/font/google'
 
 import type { Metadata } from 'next'
 import { Providers } from './providers'
