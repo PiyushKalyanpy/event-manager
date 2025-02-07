@@ -2,7 +2,9 @@
 
 import { useParams, useSearchParams } from 'next/navigation'
 
+import { DataTableDemo } from '@/components/ticket/TicketTable2'
 import DeleteEvent from '@/components/event/DeleteEvent'
+import EditEvent from '@/components/event/EditEvent'
 import TicketTable from '@/components/ticket/TicketTable'
 import { useEffect } from 'react'
 import { useTicket } from '@/hooks/useTicket'
@@ -15,24 +17,28 @@ const Studio = () => {
     console.log(eventid)
 
     useEffect(() => {
-        if (eventTickets.length <1) {
+        if (eventTickets.length < 1) {
             getTicketByEvent(eventid)
         }
     }, [eventid])
 
-    console.log(eventTickets)
-
+ 
     return (
         <div>
             {page == 'tickets' && (
                 <div>
-                    <TicketTable />{' '}
+                    <DataTableDemo data={eventTickets} />
                 </div>
             )}
-            
-             {page == 'delete-event' && (
+
+            {page == 'delete-event' && (
                 <div>
                     <DeleteEvent />{' '}
+                </div>
+            )}
+            {page == 'edit-event' && (
+                <div>
+                    <EditEvent eventId={eventid} />{' '}
                 </div>
             )}
         </div>

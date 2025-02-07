@@ -28,10 +28,7 @@ const CreateEvent = () => {
         venue: '',
         status: Status.UPCOMING,
         isLive: false,
-        time: {
-            hour: null,
-            minute: null,
-        },
+        time:'',
         tickets: {
             sold: null,
             capacity: null,
@@ -117,13 +114,7 @@ const CreateEvent = () => {
                 <MainHeader label="Create Event" />
                 <div className="flex flex-wrap gap-4"></div>
                 <form className="flex flex-col gap-4 p-4">
-                    <TimeInput
-                        label="Event Time"
-                        // onChange={(e) => {
-                        //     handleNestedChange('time', 'hour', e.hour)
-                        //     handleNestedChange('time', 'minute', e.minute)
-                        // }}
-                    />
+                    
                     <Image
                         src={
                             image
@@ -188,7 +179,9 @@ const CreateEvent = () => {
                         type="date"
                         label="Date"
                         value={event.date}
-                        onChange={(e) => handleChange('date', e.target.value)}
+                        onChange={(e) => {
+                            console.log(e.target.value)
+                            handleChange('date', e.target.value)}}
                     />{' '}
                     <Input
                         type="text"
@@ -198,13 +191,20 @@ const CreateEvent = () => {
                             handleChange('category', e.target.value)
                         }
                     />{' '}
-                    <Input
+                    {/* <Input
                         type="time"
                         label="Time"
                         value={event.time}
                         onChange={(e) =>
-                            handleChange('time', new Date(e.target.value))
+                            handleChange('time', e.target.value)
                         }
+                    /> */}
+                    <TimeInput
+                        label="Event Time"
+                        value = {event.time}
+                        onChange={(e) => {
+                             handleChange('time', `${e.hour}:${e.minute}`)
+                        }}
                     />
                     <Input
                         type="text"

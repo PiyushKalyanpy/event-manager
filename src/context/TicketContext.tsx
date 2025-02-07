@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Timestamp,
     collection,
@@ -5,6 +7,7 @@ import {
     getDoc,
     getDocs,
     onSnapshot,
+    orderBy,
     query,
     setDoc,
     updateDoc,
@@ -17,6 +20,7 @@ import ShortUniqueId from 'short-unique-id'
 import { Ticket } from '@/types/ticket'
 import { db } from '@/firebase'
 import { toast } from 'react-toast'
+import { useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 export const TicketContext = createContext<any | undefined>(undefined)
@@ -25,8 +29,8 @@ export const TicketProvider = ({ children }: any) => {
     const [tickets, setTickets] = useState<any>([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
-    const [eventTickets, setEventTickets]  = useState<any>([])
-     const uid = new ShortUniqueId({ length: 10 })
+    const [eventTickets, setEventTickets] = useState<any>([])
+    const uid = new ShortUniqueId({ length: 10 })
 
     const purchaseTicket = async (
         event: any,
@@ -54,6 +58,7 @@ export const TicketProvider = ({ children }: any) => {
                 secureCode: uid.rnd(),
                 createdAt: new Date().toISOString(),
                 purchaseTime: new Date().toISOString(),
+                eventName: event.name,
                 ...response,
             }
             await setDoc(doc(db, 'tickets', newId), newTicket).then(() => {
@@ -106,12 +111,16 @@ export const TicketProvider = ({ children }: any) => {
         }
     }
 
-
     const getTicketByEvent = async (eventid: string) => {
         setIsLoading(true)
         try {
-            console.log("Getting Ticket")
-            const snapshots = await getDocs(query(collection(db, 'tickets'), where('eventId', '==', eventid)))
+            console.log('Getting Ticket')
+            const snapshots = await getDocs(
+                query(
+                    collection(db, 'tickets'),
+                    where('eventId', '==', eventid)
+                )
+            )
             const eventData = snapshots.docs.map((item: any) => item?.data())
             setEventTickets(eventData)
         } catch (error) {

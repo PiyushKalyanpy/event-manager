@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/AuthContext.tsx", "src/context/SensorContext.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/AuthContext.tsx", "src/context/SensorContext.jsx", "src/components/ticket/TicketTable2.tsx"],
   "exclude": ["node_modules"]
 }

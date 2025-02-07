@@ -17,6 +17,7 @@ const Ticket = ({ item }: any) => {
     const {
         createdAt,
         eventId,
+        eventName,
         scannedAt,
         id,
         price,
@@ -46,7 +47,9 @@ const Ticket = ({ item }: any) => {
             <div className="flex z-10  w-3/4 h-full flex-col gap-3 p-8  ">
                 <div>
                     <p>{organiser.name}</p>
-                    <h2 className="text-2xl font-bold">Organise Event</h2>
+                    <h2 className="text-2xl font-bold">
+                        {eventName && eventName}
+                    </h2>
                 </div>
                 <div>
                     <p className="flex  items-center gap-2">

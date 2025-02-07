@@ -1,12 +1,21 @@
+import { Button, Input } from '@nextui-org/react'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from '@/components/ui/dialog'
 import { Trash, Trash2 } from 'lucide-react'
 
-import { Button } from '@nextui-org/react'
 import EventSidebarHeader from '../sidebar/event/header-sidebar'
 import Header from '../shared/Header'
 import Image from 'next/image'
 import { SidebarHeader } from '@/components/ui/sidebar'
 import { useEvent } from '@/hooks/useEvent'
 import { useParams } from 'next/navigation'
+import { useState } from 'react'
 
 const DeleteEvent = () => {
     const { eventid } = useParams()
@@ -44,13 +53,66 @@ const DeleteEvent = () => {
                     </p>
                 </div>
                 <div>
-                    <Button variant="shadow" color="danger">
-                        {' '}
-                        <Trash2 /> Delete Event
-                    </Button>
+                    <DeleteConfirmationDialog event={event} />
                 </div>
             </div>
         </div>
+    )
+}
+
+const DeleteConfirmationDialog = ({ event }: any) => {
+    const [eventName, setEventName] = useState('')
+    const handleDelete = () => {
+        // Implement your delete logic here
+        console.log('Deleting event:', event.name)
+    }
+
+    return (
+        <Dialog>
+            <DialogTrigger>
+                <div className="flex px-4 py-3 gap-4 rounded-xl shadow-2xl shadow-rose-400/40 bg-rose-600 text-white">
+                    <Trash2 /> Delete Event
+                </div>
+            </DialogTrigger>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle className="text-xl">Delete event</DialogTitle>
+                    <DialogDescription className="text-md">
+                        To proceed with deleting
+                        <span className="font-bold"> {event.name} </span>
+                        , please enter the event name below. Ensure that you
+                        provide the exact name to avoid accidental deletions.
+                        <br />
+                        <br />
+                        This action is irreversible. Deleting the event will
+                        permanently remove all associated data. Please confirm
+                        by typing the event name.
+                        <br />
+                        <br />
+                        <Input
+                            type="text"
+                            value={eventName}
+                            onChange={(e) => setEventName(e.target.value)}
+                            placeholder="Enter event name"
+                        />
+                        <Button
+                            className="mt-4"
+                            
+                            color={eventName === event.name ? 'danger' : 'default'}
+                            onClick={handleDelete}
+                            disabled={eventName !== event.name}
+                        >
+                            Delete Event
+                        </Button>
+                        {eventName && eventName !== event.name && (
+                            <p className="text-sm text-red-500 mt-2">
+                                Event name does not match.
+                            </p>
+                        )}
+                    </DialogDescription>
+                </DialogHeader>
+            </DialogContent>
+        </Dialog>
     )
 }
 

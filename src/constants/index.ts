@@ -2,6 +2,7 @@ import {
     Calendar,
     Edit,
     FileText,
+    Flame,
     GitGraph,
     HelpCircle,
     Home,
@@ -32,6 +33,11 @@ export const globalSidebarItems = {
             icon: GitGraph,
         },
         {
+            title: 'Scanner',
+            url: '/scanner',
+            icon: GitGraph,
+        },
+        {
             title: 'Settings',
             url: '#',
             icon: Settings,
@@ -59,20 +65,16 @@ export const eventSidebarItems = {
             icon: Home,
         },
         {
-            title: 'Tickets',
+            title: 'Attendees',
             url: '/tickets',
-            icon: Inbox,
+            icon: Users,
         },
         {
             title: 'Analytics',
             url: '/analytics',
             icon: GitGraph,
         },
-        {
-            title: 'Attendees',
-            url: '/attendees',
-            icon: Users,
-        },
+
         {
             title: 'Edit Event',
             url: '/edit-event',
@@ -87,6 +89,11 @@ export const eventSidebarItems = {
             title: 'Sensor Connect',
             url: '/sensor-connect',
             icon: Wifi,
+        },
+        {
+            title: 'SOS Alert',
+            url: '/sos-alert',
+            icon: Flame,
         },
         {
             title: 'Delete Event',

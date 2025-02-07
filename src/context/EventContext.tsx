@@ -1,6 +1,6 @@
 'use client'
 
-import { collection, doc, getDocs, query, setDoc } from 'firebase/firestore'
+import { collection, doc, getDocs, query, setDoc, updateDoc } from 'firebase/firestore'
 import { createContext, useEffect, useState } from 'react'
 import { db, storage } from '@/firebase'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
@@ -54,6 +54,8 @@ export default function EventContextProvider({ children }: any) {
         }
     }
 
+  
+
     const getAllEvents = async () => {
         setIsLoading(true)
         try {
@@ -78,6 +80,23 @@ export default function EventContextProvider({ children }: any) {
         }
     }
 
+    const updateEvent = async (event: any) => {
+        try {
+            toast.info('Updating event...')
+            await updateDoc(doc(db, 'events', event.id), event)
+            setEvents((prevEvents: any) => {
+                return prevEvents.map((e: any) => {
+                    if (e.id === event.id) {
+                        return event
+                    }
+                    return e
+                })
+            })
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
     useEffect(() => {
         if (events.length === 0) {
             console.log('✅ getting events')
@@ -90,6 +109,7 @@ export default function EventContextProvider({ children }: any) {
             value={{
                 events,
                 createEvent,
+                updateEvent,
                 // updateEvent,
                 getEventById,
                 // deleteEvent,

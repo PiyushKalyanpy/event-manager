@@ -13,22 +13,28 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { AuthContextType } from '@/types/auth'
 import { TUser } from '@/types/user'
 import { handleError } from '@/utils/errorHandler'
+import { useRouter } from 'next/navigation'
 
 export const AuthContext = createContext<AuthContextType | null>(null)
 
 export default function AuthContextProvider({ children }: any) {
     const [user, setUser]: any = useState()
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const router  = useRouter()
 
     useEffect(() => {
         setIsLoading(true)
         async function unsub() {
-             onAuthStateChanged(auth, (user) => {
- 
+            onAuthStateChanged(auth, (user) => {
                 if (user) {
-                     getUser(user).then((data) => {
-                         setUser(data)
+                    getUser(user).then((data) => {
+                        console.log(data , "data: ")
+                        setUser(data)
                         setIsLoading(false)
+                        if(data==null) {
+                            createUser(user)
+                        }
+                             
                     })
                 } else {
                     setUser(null)
@@ -53,6 +59,8 @@ export default function AuthContextProvider({ children }: any) {
         setIsLoading(true)
         try {
             await signOut(auth)
+            router.push('/login')
+            
         } catch (err) {
             handleError(err)
         }
@@ -82,7 +90,7 @@ const getUser = async (user: any) => {
     return null
 }
 
-const setUser = async (user: any) => {
+const createUser = async (user: any) => {
     if (user) {
         try {
             const newUser: TUser = {

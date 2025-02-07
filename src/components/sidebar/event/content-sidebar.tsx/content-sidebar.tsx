@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/sidebar'
 import { eventSidebarItems, globalSidebarItems } from '@/constants'
 
+import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 const GlobalSidebarContent = () => {
@@ -24,12 +25,12 @@ const GlobalSidebarContent = () => {
                         {eventSidebarItems.content.map((item) => (
                             <SidebarMenuItem key={item.title}>
                                 <SidebarMenuButton asChild>
-                                    <a
+                                    <Link
                                         href={`/${eventid}/studio?p=${item.url.split('/').pop()}`}
                                     >
                                         <item.icon />
                                         <span>{item.title}</span>
-                                    </a>
+                                    </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}

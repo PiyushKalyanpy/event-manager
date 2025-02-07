@@ -1,4 +1,4 @@
-export interface Ticket {
+export type Ticket = {
     id: string
     eventId: string
     userId: string
@@ -13,5 +13,5 @@ export interface Ticket {
     purchaseTime: string
     secureCode: string
     createdAt: string
-    validatedAt?: string | null
+    scannedAt?: string | null
 }

@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation'
 
 const LoginButton = () => {
     const router = useRouter()
-    const { user, handleSignInWithGoogle, isLoading, handleLogout }: any =
+    const { user, handleSignInWithGoogle, isLoading, logout }: any =
         useAuth()
 
     if (user) {
@@ -32,7 +32,7 @@ const LoginButton = () => {
                     <DropdownMenu
                         onAction={(key) => {
                             if (key === 'logout') {
-                                handleLogout()
+                                logout()
                             }
                             if (key === 'dashboard') {
                                 router.push('/dashboard')
@@ -54,7 +54,7 @@ const LoginButton = () => {
                             </DropdownItem>
                         )}
                         <DropdownItem key="my_events">My Events</DropdownItem>
-                        <DropdownItem key="logout" color="danger">
+                        <DropdownItem onClick={logout} key="logout" color="danger">
                             Log Out
                         </DropdownItem>
                     </DropdownMenu>

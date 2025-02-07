@@ -149,7 +149,20 @@ const Page = ({ params }: any) => {
                                 </div>
                             </div>
                         )}
-                        {user && (
+                        {user &&
+                            !(
+                                currentEvent.price.general == '0' &&
+                                currentEvent.price.vip == '0'
+                            ) && (
+                                <PaymentButton
+                                    event={currentEvent}
+                                    user={user}
+                                    color="secondary"
+                                    amount={parseInt(currentEvent.price.vip)}
+                                    ticketType="VIP"
+                                />
+                            )}
+                        {currentEvent.price.genral != '0' && (
                             <PaymentButton
                                 event={currentEvent}
                                 user={user}
@@ -158,16 +171,6 @@ const Page = ({ params }: any) => {
                                 ticketType="General"
                             />
                         )}
-                         {currentEvent.price.vip !== '0' && (
-                            <PaymentButton
-                                event={currentEvent}
-                                user={user}
-                                color="secondary"
-                                amount={parseInt(currentEvent.price.vip)}
-                                ticketType="VIP"
-                            />
-                        )}
-                        
                     </div>
                 </div>
             </div>

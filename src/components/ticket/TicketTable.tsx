@@ -18,18 +18,18 @@ import { useTicket } from '@/hooks/useTicket'
 
 const TicketTable = () => {
     const { eventTickets } = useTicket()
-
+    console.log(eventTickets)
     return (
         <div className="p-4">
             <Table className=" p-8">
-                 <TableHeader>
+                <TableHeader>
                     <TableRow>
                         <TableHead className="w-[200px]">Name</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Purchased At</TableHead>
                         <TableHead>Type</TableHead>
                         <TableHead>User Id</TableHead>
-                        <TableHead>Event Id</TableHead>
+                        <TableHead>Ticket Id</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className="text-right">Amount</TableHead>
                     </TableRow>
@@ -41,7 +41,8 @@ const TicketTable = () => {
                             <TableRow className="    " key={ticket.id}>
                                 <TableCell className="flex items-center gap-4">
                                     <Avatar src={ticket.user.photoURL} />
-                                    {ticket.user.name}</TableCell>
+                                    {ticket.user.name}
+                                </TableCell>
                                 <TableCell>{ticket.user.email}</TableCell>
                                 <TableCell>
                                     <span>
@@ -74,8 +75,8 @@ const TicketTable = () => {
                                 </TableCell>
                                 <TableCell>
                                     {/* show event id like aasd....asd */}
-                                    {ticket.eventId.slice(0, 5)}...{' '}
-                                    {ticket.eventId.slice(-3)}
+                                    {ticket.id.slice(0, 5)}...{' '}
+                                    {ticket.id.slice(-3)}
                                 </TableCell>
                                 <TableCell>
                                     {ticket.status === 'Booked' && (
