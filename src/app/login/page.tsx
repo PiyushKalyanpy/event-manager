@@ -13,7 +13,7 @@ const AuthPage = () => {
         return <Loading />
     }
     if (user) {
-        router.push('/dashboard')
+        router.push('/')
     }
 
     return (

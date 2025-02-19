@@ -1,20 +1,12 @@
-'use client'
+'use client';
 
-import { CaretSortIcon, DotsHorizontalIcon } from '@radix-ui/react-icons'
-import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { CaretSortIcon } from '@radix-ui/react-icons';
 import { Checkbox } from '@/components/ui/checkbox'
 import Chip from '../shared/MChip'
+import { ColumnDef } from '@tanstack/react-table';
 import { formatDateTime } from '@/utils'
 
 type Ticket = {
@@ -59,6 +51,36 @@ export const columns: ColumnDef<Ticket, any>[] = [
         ),
         enableSorting: false,
         enableHiding: false,
+    },
+    {
+        accessorKey: 'photoURL',
+        accessorFn: (row) => row.user.photoURL,
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    className="-ml-4"
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === 'asc')
+                    }
+                >
+                    Photo
+                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                </Button>
+            )
+        },
+        cell: ({ row }) => (
+            <div className="flex space-x-2">
+                <span className="max-w-[200px] truncate font-medium">
+
+                <Avatar>
+  <AvatarImage src={row.getValue('photoURL')} />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+
+                </span>
+            </div>
+        ),
     },
     {
         accessorKey: 'name',

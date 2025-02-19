@@ -13,6 +13,10 @@ const font = Space_Grotesk({
     subsets: ['latin-ext'],
     variable: '--font-inter',
 })
+const manrope = Manrope({
+    weight: ['300'],
+    subsets: ['latin-ext'],
+})
 
 export const metadata: Metadata = {
     title: 'Real-Time Event Management - My Event Manager App',
@@ -31,7 +35,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${font.className} dark antialiased `}>
+            <body className={`${manrope.className} dark antialiased `}>
                 <Suspense>
                     <Providers>{children}</Providers>
                 </Suspense>

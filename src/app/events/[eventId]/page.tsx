@@ -30,6 +30,8 @@ const Page = ({ params }: any) => {
         router.push('/login')
     }
 
+    console.log(user , "user")
+
     return (
         <div className=" bg-black rounded-3xl w-screen flex justify-center p-4  md:p-8 min-h-screen">
             <div className=" w-full md:w-3/4 flex flex-col gap-5  ">

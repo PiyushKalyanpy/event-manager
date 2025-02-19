@@ -41,8 +41,9 @@ export const TicketProvider = ({ children }: any) => {
     ) => {
         try {
             setIsLoading(true)
-            console.log(event)
+            console.log(event, user)
             const newId = doc(collection(db, 'ids')).id
+           if(user ){
             const newTicket: Ticket = {
                 id: newId,
                 eventId: event.id,
@@ -50,7 +51,7 @@ export const TicketProvider = ({ children }: any) => {
                 price: amount,
                 status: 'Booked',
                 user: {
-                    name: user.displayName,
+                    name: user.name,
                     email: user.email,
                     photoURL: user.photoURL,
                 },
@@ -64,6 +65,7 @@ export const TicketProvider = ({ children }: any) => {
             await setDoc(doc(db, 'tickets', newId), newTicket).then(() => {
                 toast.success('Ticket purchased successfully')
             })
+           }
         } catch (error) {
             console.log(error)
             toast.error('Failed to purchase ticket')
@@ -114,14 +116,14 @@ export const TicketProvider = ({ children }: any) => {
     const getTicketByEvent = async (eventid: string) => {
         setIsLoading(true)
         try {
-            console.log('Getting Ticket')
-            const snapshots = await getDocs(
-                query(
-                    collection(db, 'tickets'),
-                    where('eventId', '==', eventid)
-                )
+            console.log('📍Getting Ticket')
+            const q = query(
+                collection(db, 'tickets'),
+                where('eventId', '==', eventid)
             )
+            const snapshots = await getDocs(q)
             const eventData = snapshots.docs.map((item: any) => item?.data())
+            console.log('eventdata: ', eventData)
             setEventTickets(eventData)
         } catch (error) {
             console.error('Error fetching events: ', error)
