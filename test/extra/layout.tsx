@@ -3,7 +3,7 @@ import './globals.css'
 import { Inter_Tight, Manrope, Space_Grotesk } from 'next/font/google'
 
 import type { Metadata } from 'next'
-import { Providers } from './providers'
+import { Providers } from '../app/providers'
 import { Suspense } from 'react'
 import { ToastContainer } from 'react-toast'
 import localFont from 'next/font/local'
@@ -36,11 +36,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${manrope.className} dark antialiased `}>
-             <Suspense>
-             <Providers>
-                {children}
-                </Providers>
-             </Suspense>
+                <Suspense>
+                  {children}
+                </Suspense>
             </body>
         </html>
     )

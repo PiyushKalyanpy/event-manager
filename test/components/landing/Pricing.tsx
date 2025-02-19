@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { CircleDot, Shield, Target } from 'lucide-react'
 
 import { Button } from '@heroui/react'
@@ -42,14 +42,14 @@ export default function PricingSection() {
                                 personal devices, for free.
                             </p>
                         </CardHeader>
-                        <CardBody className="space-y-4">
+                        <CardContent className="space-y-4">
                             <div>
                                 <span className="text-5xl font-bold">Free</span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-neutral-400">
                                 <span>1 device</span>
                             </div>
-                        </CardBody>
+                        </CardContent>
                         <CardFooter>
                             <Button className="w-full ">Try Now</Button>
                         </CardFooter>
@@ -77,7 +77,7 @@ export default function PricingSection() {
                                 easy-to-use, secure, legacy VPN replacement.
                             </p>
                         </CardHeader>
-                        <CardBody className="space-y-4 z-20">
+                        <CardContent className="space-y-4 z-20">
                             <div>
                                 <span className="text-5xl font-bold font-serif">
                                     ₹
@@ -98,7 +98,7 @@ export default function PricingSection() {
                                     +3 EXTRA months
                                 </div>
                             </div>
-                        </CardBody>
+                        </CardContent>
                         <CardFooter className="flex flex-col gap-4">
                             <Button color="primary" className="w-full">
                                 Subscribe Now
@@ -127,7 +127,7 @@ export default function PricingSection() {
                                 level authentication and access control.
                             </p>
                         </CardHeader>
-                        <CardBody className="space-y-4">
+                        <CardContent className="space-y-4">
                             <div>
                                 <span className="text-5xl font-bold font-serif">
                                     ₹
@@ -145,7 +145,7 @@ export default function PricingSection() {
                                     +3 EXTRA months
                                 </div>
                             </div>
-                        </CardBody>
+                        </CardContent>
                         <CardFooter className="flex flex-col gap-4">
                             <Button className="w-full ">Subscribe Now</Button>
                             <p className="text-xs text-neutral-400 flex items-center gap-2">

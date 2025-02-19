@@ -14,19 +14,20 @@ import { useRouter } from 'next/navigation'
 
 const LoginButton = () => {
     const router = useRouter()
-    const { user, login, logout } = useAuth()
-
-    const handleLogin = () => {
-        login()
-    }
+    const { user, handleSignInWithGoogle, isLoading, logout }: any =
+        useAuth()
 
     if (user) {
         return (
             <div>
                 <Dropdown placement="bottom-end">
                     <DropdownTrigger>
-                    <Avatar name={user.name} src={user.photoURL} />
-
+                        <Avatar
+                            isBordered
+                            as="button"
+                            className="transition-transform"
+                            src={user?.photoURL}
+                        />
                     </DropdownTrigger>
                     <DropdownMenu
                         onAction={(key) => {
@@ -53,11 +54,7 @@ const LoginButton = () => {
                             </DropdownItem>
                         )}
                         <DropdownItem key="my_events">My Events</DropdownItem>
-                        <DropdownItem
-                            onClick={logout}
-                            key="logout"
-                            color="danger"
-                        >
+                        <DropdownItem onClick={logout} key="logout" color="danger">
                             Log Out
                         </DropdownItem>
                     </DropdownMenu>
@@ -69,10 +66,10 @@ const LoginButton = () => {
     return (
         <div className=" ">
             <Button
-                onPress={login}
+                onClick={handleSignInWithGoogle}
                 color="primary"
-                // isLoading={isLoading}
-                // isDisabled={isLoading}
+                isLoading={isLoading}
+                isDisabled={isLoading}
             >
                 Login
             </Button>

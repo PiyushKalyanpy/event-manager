@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\""
   },
   "dependencies": {
+    "@heroui/react": "^2.7.2",
     "@hookform/resolvers": "^3.9.1",
     "@nextui-org/react": "^2.4.8",
     "@radix-ui/react-avatar": "^1.1.3",
