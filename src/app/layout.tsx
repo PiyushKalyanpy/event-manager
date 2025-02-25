@@ -5,7 +5,7 @@ import { Inter_Tight, Manrope, Space_Grotesk } from 'next/font/google'
 import type { Metadata } from 'next'
 import { Providers } from './providers'
 import { Suspense } from 'react'
-import { ToastContainer } from 'react-toast'
+import { ToastContainer } from 'react-toastify'
 import localFont from 'next/font/local'
 
 const font = Space_Grotesk({
@@ -14,7 +14,7 @@ const font = Space_Grotesk({
     variable: '--font-inter',
 })
 const manrope = Manrope({
-    weight: ['300'],
+    weight: ['400'],
     subsets: ['latin-ext'],
 })
 
@@ -35,12 +35,15 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${manrope.className} dark antialiased `}>
-             <Suspense>
-             <Providers>
-                {children}
-                </Providers>
-             </Suspense>
+            <body
+                className={`${manrope.className} dark antialiased bg-black w-screen min-h-screen `}
+            >
+                <Suspense>
+                    <Providers>
+                        {children}
+                        <ToastContainer />
+                    </Providers>
+                </Suspense>
             </body>
         </html>
     )

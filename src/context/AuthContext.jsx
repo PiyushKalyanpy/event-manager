@@ -55,7 +55,7 @@ export default function AuthContextProvider({ children }) {
         setIsLoading(true)
         try {
             await signOut(auth)
-            router.push('/login')
+            router.push('/')
         } catch (err) {
             handleError(err)
         }

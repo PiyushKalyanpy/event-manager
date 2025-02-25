@@ -3,26 +3,32 @@
 import {
     Avatar,
     Button,
+    CircularProgress,
     Dropdown,
     DropdownItem,
     DropdownMenu,
     DropdownTrigger,
 } from '@heroui/react'
 
+import Image from 'next/image'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 
 const LoginButton = () => {
     const router = useRouter()
-    const { user, login, logout } = useAuth()
+    const { user, login, logout, isLoading } = useAuth()
 
     const handleLogin = () => {
         login()
+    }
+    if(isLoading){
+        return <p><CircularProgress/></p>
     }
 
     if (user) {
         return (
             <div>
+            
                 <Dropdown placement="bottom-end">
                     <DropdownTrigger>
                     <Avatar name={user.name} src={user.photoURL} />
@@ -34,10 +40,10 @@ const LoginButton = () => {
                                 logout()
                             }
                             if (key === 'dashboard') {
-                                router.push('/dashboard')
+                                router.push('/admin')
                             }
-                            if (key === 'my_events') {
-                                router.push('/events/me')
+                            if (key === 'my-tickets') {
+                                router.push('/my-tickets')
                             }
                         }}
                         aria-label="Profile Actions"
@@ -52,9 +58,9 @@ const LoginButton = () => {
                                 Dashboard
                             </DropdownItem>
                         )}
-                        <DropdownItem key="my_events">My Events</DropdownItem>
+                        <DropdownItem key="my-tickets">My Tickets</DropdownItem>
                         <DropdownItem
-                            onClick={logout}
+                            onPress={logout}
                             key="logout"
                             color="danger"
                         >

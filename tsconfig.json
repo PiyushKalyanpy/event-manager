@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/AuthContext.jsx", "src/context/SensorContext.jsx", "src/components/ticket/TicketTable2.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/context/AuthContext.jsx", "src/context/SensorContext.jsx", "src/components/ticket/TicketTable2.tsx", "src/hooks/useAuth.js", "src/components/event/EventCard.jsx", "src/components/shared/PaymentButton.tsx", "src/app/events/me/page.jsx", "src/components/ticket/Ticket.jsx", "src/app/scanner/page.jsx", "src/app/test/page.jsx", "src/app/dashboard/page.jsx", "src/app/dashboard/layout.jsx", "src/components/sidebar/MainSidebar.jsx", "src/app/[eventid]/studio/layout.jsx", "src/app/(attendee)/my-tickets/page.jsx", "src/app/test/events/create/page.jsx"],
   "exclude": ["node_modules"]
 }
