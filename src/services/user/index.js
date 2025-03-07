@@ -7,8 +7,7 @@ export const getUserById = async (userId) => {
     const userRef = doc(db, 'users', userId)
     const dbUser = await getDoc(userRef)
     if (dbUser.exists()) {
-        console.log(dbUser.data(), 'dbUser.data()')
-        return dbUser.data()
+         return dbUser.data()
     }
     return null
 }

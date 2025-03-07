@@ -8,7 +8,7 @@ import { TimeInput } from '@heroui/react'
 import { useEvent } from '@/hooks/useEvent'
 
 const EditEvent = ({ eventId }: any) => {
-    const { events , updateEvent}: any = useEvent()
+    const { events, updateEvent }: any = useEvent()
     const selectedEvent = events.find((e: any) => e.id === eventId)
 
     const [event, setEvent]: any = useState({})
@@ -48,9 +48,7 @@ const EditEvent = ({ eventId }: any) => {
 
     if (!event) return <div> No such event found </div>
 
-
-
-    // write the function to update the event in firebase 
+    // write the function to update the event in firebase
 
     return (
         <div>
@@ -265,7 +263,9 @@ const EditEvent = ({ eventId }: any) => {
                             }
                             label="Tickets Capacity"
                         />
-                        <Button onClick={handleUpdate} color="primary">Update</Button>
+                        <Button onClick={handleUpdate} color="primary">
+                            Update
+                        </Button>
                     </div>
                 </div>
             )}

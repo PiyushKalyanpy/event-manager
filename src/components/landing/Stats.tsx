@@ -12,14 +12,21 @@ const StatsComponent: React.FC = () => {
         <div className="flex w-screen overflow-hidden h-fit p-8 bg-neutral-800/50 items-center justify-center">
             <div className="bg-dark-gradient p-8 rounded-lg flex justify-between items-center text-white  gap-8 flex-col md:flex-row  ">
                 {stats.map((stat, index) => (
-                    <div key={index} className="flex   items-center p-4  gap-24">
+                    <div
+                        key={index}
+                        className="flex   items-center p-4  gap-24"
+                    >
                         <div className="text-center w-fit items-center  flex gap-4 flex-col ">
-                            <h3 className="text-3xl text-center font-bold">{stat.value}</h3>
+                            <h3 className="text-3xl text-center font-bold">
+                                {stat.value}
+                            </h3>
                             <p className="text-sm mt-2 opacity-75">
                                 {stat.label}
                             </p>
                         </div>
-                        <div className='hidden md:block'>{index !== stats.length - 1 && <Divider />}</div>
+                        <div className="hidden md:block">
+                            {index !== stats.length - 1 && <Divider />}
+                        </div>
                     </div>
                 ))}
             </div>

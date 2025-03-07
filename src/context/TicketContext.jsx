@@ -1,7 +1,16 @@
-'use client';
+'use client'
 
-import { Timestamp, collection, doc, getDocs, query, setDoc, where, writeBatch } from 'firebase/firestore';
-import { createContext, useState } from 'react';
+import {
+    Timestamp,
+    collection,
+    doc,
+    getDocs,
+    query,
+    setDoc,
+    where,
+    writeBatch,
+} from 'firebase/firestore'
+import { createContext, useState } from 'react'
 
 import ShortUniqueId from 'short-unique-id'
 import { db } from '@/firebase'
@@ -13,6 +22,7 @@ export default function TicketProvider({ children }) {
     const [isLoading, setIsLoading] = useState(false)
     const [userTickets, setUserTickets] = useState([])
     const [eventTickets, setEventTickets] = useState([])
+    const [scannedUser, setScannedUser] = useState([])
     const uid = new ShortUniqueId({ length: 10 })
 
     const purchaseTicket = async (
@@ -34,18 +44,20 @@ export default function TicketProvider({ children }) {
                     price: amount,
                     status: 'Booked',
                     user: {
-                        name: user.name,
+                        name: user.displayName,
                         email: user.email,
                         photoURL: user.photoURL,
                     },
                     ticketType: ticketType,
                     secureCode: uid.rnd().toString(),
                     createdAt: new Date().toISOString(),
-                    purchaseTime: new Date().toISOString(),
                     eventName: event.name,
-                    venue : event.venue, 
-                    eventImage : event.imageUrl,
                     eventDate: event.date,
+                    startTime: event.start_time,
+                    endTime: event.end_time,
+                    venue: event.venue.name,
+                    eventImage: event.imageURL,
+                    organiser: event.organiser.name,
                     ...response,
                 }
 
@@ -84,12 +96,15 @@ export default function TicketProvider({ children }) {
         setIsLoading(true)
         try {
             const snapshot = await getDocs(
-                collection(db, 'tickets', where('eventId', '==', eventId))
+                query(
+                    collection(db, 'tickets'), where('eventId', '==', eventId)
+                )
             )
             const tickets = snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data(),
             }))
+            console.log(tickets)
             setEventTickets(tickets)
         } catch (error) {
             console.error(error)
@@ -99,14 +114,14 @@ export default function TicketProvider({ children }) {
     const scanTicket = async (secureCode) => {
         setIsLoading(true)
         try {
-            console.log(secureCode) 
+            console.log(secureCode)
             const q = query(
                 collection(db, 'tickets'),
                 where('secureCode', '==', secureCode)
             )
             const querySnapshot = await getDocs(q)
             const ticket = querySnapshot.docs[0].data()
-            console.log(ticket.status)
+            console.log(ticket, 'before')
 
             if (ticket) {
                 if (ticket.status === 'Scanned') {
@@ -118,7 +133,9 @@ export default function TicketProvider({ children }) {
                     batch.update(ticketRef, { status: 'Scanned' })
                     batch.update(ticketRef, { scannedAt: Timestamp.now() })
                     await batch.commit()
+                    setScannedUser(ticket)
                     toast.success('Ticket scanned successfully')
+                    console.log(ticket, 'after')
                 }
             } else {
                 toast.error('Ticket not found')
@@ -129,14 +146,19 @@ export default function TicketProvider({ children }) {
     }
 
     return (
-        <TicketContext.Provider value={{
-            purchaseTicket,
-            getTicketByUserId,
-            getTicketByEventId,
-            scanTicket,
-            isLoading,
-            userTickets,
-            eventTickets,
-        }}>{children}</TicketContext.Provider>
+        <TicketContext.Provider
+            value={{
+                purchaseTicket,
+                getTicketByUserId,
+                getTicketByEventId,
+                scanTicket,
+                isLoading,
+                userTickets,
+                scannedUser,
+                eventTickets,
+            }}
+        >
+            {children}
+        </TicketContext.Provider>
     )
 }

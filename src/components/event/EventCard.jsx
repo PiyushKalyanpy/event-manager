@@ -12,10 +12,26 @@ import { useAuth } from '@/hooks/useAuth'
 import { useEvent } from '@/hooks/useEvent'
 
 const EventCard = (event) => {
-    const { id, name, date, time, venue, status, imageURL, price, userId } =
-        event.event.data
+    const {
+        name,
+        short_description,
+        description,
+        category,
+        date,
+        start_time,
+        end_time,
+        venue,
+        max_attendees,
+        ticket_price,
+        status,
+        imageURL,
+        createdAt,
+        updatedAt,
+        organiser,
+    } = event.event.data
     const { user } = useAuth()
     const { updateSelectedEvent } = useEvent()
+    const id = event.event.id
 
     const path = usePathname()
     const isEventPage = path.includes('events')
@@ -27,80 +43,81 @@ const EventCard = (event) => {
     }
 
     return (
-        <div onClick={onCardClick}>
-            <Card className=" hover:scale-105 cursor-pointer z-10  p-4 h-fit w-full bg-neutral-900 border-0 group/item">
-                <CardHeader className="w-full  p-0 rounded-2xl overflow-hidden h-32">
+        <div className="w-full  " onClick={onCardClick}>
+            <Card className="    hover:scale-105 cursor-pointer z-10 p-4 h-fit w-full bg-neutral-950/70 group/item">
+                <CardHeader className="w-full p-0 rounded-2xl bg-transparent  overflow-hidden h-32">
                     <Image
-                        className="w-full h-32  object-cover border rounded-2xl border-neutral-800/40  "
+                        className="w-full h-32 object-cover border rounded-2xl border-neutral-800/40"
                         width={1000}
                         height={1000}
                         src={imageURL}
                         alt="logo"
                     />
                 </CardHeader>
-                <CardBody className=" flex gap-4 ">
-                    <div className="flex gap-4  items-center">
+                <CardBody className="flex flex-col gap-4">
+                    <div className="flex gap-4 items-center">
                         {status === 'Ongoing' && <LiveBlink />}
-                        <EventStatus statusType={status} />
+                        <EventStatus
+                            statusType={
+                                new Date(date) < new Date()
+                                    ? 'Completed'
+                                    : 'Upcoming'
+                            }
+                        />
                     </div>
                     <h3 className="text-xl pt-4 text-ellipsis line-clamp-1 font-bold">
-                        {name}{' '}
+                        {name}
                     </h3>
-                    <div className="flex  items-center gap-12 pt-4">
+                    <p className="text-sm text-neutral-400 line-clamp-2">
+                        {short_description}
+                    </p>
+                    <div className="flex items-center gap-12 pt-4 text-sm">
                         <IconWithValue icon={Calendar} label={date} />
-                        <IconWithValue icon={Clock} label={time} />
+                        <IconWithValue
+                            icon={Clock}
+                            label={`${start_time.slice(0, 5)} - ${end_time.slice(0, 5)}`}
+                        />
                     </div>
-                    <IconWithValue icon={Map} label={venue} />
+                    <IconWithValue icon={Map} label={`${venue.name}`} />
                     {!isEventPage && (
-                        <div className="flex  items-center gap-4  ">
-                            <IconWithValue icon={Users} label="250 attendees" />
+                        <div className="flex items-center gap-4">
+                            <IconWithValue
+                                icon={Users}
+                                label={`${max_attendees} attendees`}
+                            />
                             <IconWithValue
                                 icon={Ticket}
-                                label="30 tickets left"
+                                label={`${ticket_price} per ticket`}
                             />
                         </div>
                     )}
                 </CardBody>
-                {/* show price in card footer */}
 
-                {user && (userId == user.uid) ? (
-                    <CardFooter className="   gap-2    transition duration-800 ease-in-out bottom-0  backdrop-blur-sm p-4   left-0 pt-8 ">
+                {user && organiser.id === user.uid ? (
+                    <CardFooter className="gap-2 transition duration-800  ease-in-out bottom-0  p-4 left-0 pt-8">
                         <Button
                             variant="light"
                             className="rounded-full w-full border "
                             startContent={<Radio size={16} />}
-                            onClick={() => {
+                            onPress={() => {
                                 router.refresh()
-                                router.push(`/${id}/studio`)
+                                updateSelectedEvent(id)
+                                router.push(`/studio`)
                             }}
                         >
                             View in Studio
                         </Button>
                     </CardFooter>
                 ) : (
-                    <CardFooter className=" border-t  ">
+                    <CardFooter className="border-t">
                         <div className="flex justify-between w-full">
                             <div>
                                 <div className="flex gap-2">
-                                    <p className="text-lg font-serif  ">₹</p>
-                                    <p className="text-lg  ">{price.vip}</p>
+                                    <p className="text-lg font-serif">₹</p>
+                                    <p className="text-lg">{ticket_price}</p>
                                 </div>
-                                <p className="text-sm py-1 text-neutral-400 ">
-                                    vip
-                                </p>
-                            </div>
-
-                            <div>
-                                <div className="flex gap-2">
-                                    <p className="text-lg font-serif   text-yellow-300">
-                                        ₹
-                                    </p>
-                                    <p className="text-lg  font-bold text-yellow-300">
-                                        {price.general}
-                                    </p>
-                                </div>
-                                <p className="text-sm py-1 text-neutral-400 ">
-                                    general
+                                <p className="text-sm py-1 text-neutral-400">
+                                    General Admission
                                 </p>
                             </div>
                         </div>

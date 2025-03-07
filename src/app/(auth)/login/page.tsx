@@ -1,11 +1,11 @@
-import LoginButton from "@/components/shared/LoginButton";
+import LoginButton from '@/components/shared/LoginButton'
 
 const Login = () => {
     return (
         <div>
-            <LoginButton/>
+            <LoginButton />
         </div>
-    );
+    )
 }
 
-export default Login;
+export default Login

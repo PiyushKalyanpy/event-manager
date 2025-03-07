@@ -22,10 +22,7 @@ export default function AuthContextProvider({ children }) {
         async function unsub() {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    console.log('User is signed in:', user)
                     getUserById(user.uid).then((data) => {
-                        console.log(data, 'data: ')
-                        
                         setUser(data)
                         setIsLoading(false)
                         if (data == null) {

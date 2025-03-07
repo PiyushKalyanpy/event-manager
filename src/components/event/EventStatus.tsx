@@ -10,7 +10,7 @@ const EventStatus = ({ statusType }: any) => {
     useEffect(() => {
         if (statusType == Status.COMPLETED) {
             setColor('danger')
-        }   
+        }
         if (statusType == Status.UPCOMING) {
             setColor('success')
         }

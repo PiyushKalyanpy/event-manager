@@ -10,7 +10,6 @@ import {
     DropdownTrigger,
 } from '@heroui/react'
 
-import Image from 'next/image'
 import { useAuth } from '@/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 
@@ -18,21 +17,20 @@ const LoginButton = () => {
     const router = useRouter()
     const { user, login, logout, isLoading } = useAuth()
 
-    const handleLogin = () => {
-        login()
-    }
-    if(isLoading){
-        return <p><CircularProgress/></p>
+    if (isLoading) {
+        return (
+            <p>
+                <CircularProgress />
+            </p>
+        )
     }
 
     if (user) {
         return (
             <div>
-            
                 <Dropdown placement="bottom-end">
                     <DropdownTrigger>
-                    <Avatar name={user.name} src={user.photoURL} />
-
+                        <Avatar name={user.name} src={user.photoURL} />
                     </DropdownTrigger>
                     <DropdownMenu
                         onAction={(key) => {
@@ -45,23 +43,33 @@ const LoginButton = () => {
                             if (key === 'my-tickets') {
                                 router.push('/my-tickets')
                             }
+                            if (key === 'home') {
+                                router.push('/home')
+                            }
                         }}
                         aria-label="Profile Actions"
                         variant="flat"
+                        className="flex flex-col gap-3 bg-black rounded-2xl"
                     >
-                        <DropdownItem key="profile" className="h-14 gap-2">
+                        <DropdownItem key="profile" className="h-14 gap-2 ">
                             <p className="font-semibold">Signed in as</p>
                             <p className="font-semibold">{user?.email}</p>
                         </DropdownItem>
                         {user.isAdmin && (
-                            <DropdownItem key="dashboard">
+                            <DropdownItem className="p-4" key="dashboard">
                                 Dashboard
                             </DropdownItem>
                         )}
-                        <DropdownItem key="my-tickets">My Tickets</DropdownItem>
+                        <DropdownItem className="p-4 " key="home">
+                            Home
+                        </DropdownItem>
+                        <DropdownItem className="p-4 " key="my-tickets">
+                            My Tickets
+                        </DropdownItem>
                         <DropdownItem
                             onPress={logout}
                             key="logout"
+                            className="p-4"
                             color="danger"
                         >
                             Log Out
@@ -74,12 +82,7 @@ const LoginButton = () => {
 
     return (
         <div className=" ">
-            <Button
-                onPress={login}
-                color="primary"
-                // isLoading={isLoading}
-                // isDisabled={isLoading}
-            >
+            <Button onPress={login} color="primary">
                 Login
             </Button>
         </div>

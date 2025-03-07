@@ -1,8 +1,9 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"], 
+  "extends": ["next/core-web-vitals", "next/typescript", "next/javascript"], 
   "rules": {
     "@typescript-eslint/no-unused-vars" : "error",
     // "@typescript-eslint/no-explicit-any" : "off"
-    "eslint-plugin-unicorn/error-message" : "true"
+    "eslint-plugin-unicorn/error-message" : "true",
+    "eslint-plugin-import/no-absolute-path" : "error"
   }
 }

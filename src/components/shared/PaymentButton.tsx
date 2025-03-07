@@ -22,11 +22,11 @@ const PaymentButton = ({
 
     const handlePayment = async () => {
         setISProcessing(true)
-        console.log("handle payement called", user)
+        console.log('handle payement called', user)
 
         if (amount === 0) {
             try {
-                console.log("amount is 0")
+                console.log('amount is 0')
                 purchaseTicket(event, user, amount, ticketType)
             } catch {
                 toast.error('Error buying this ticket')
@@ -58,7 +58,7 @@ const PaymentButton = ({
                             ticketType,
                             response
                         )
-                        
+
                         toast.success('You have successfully purchased ticket')
                     } catch {
                         toast.error('Error buying this ticket')

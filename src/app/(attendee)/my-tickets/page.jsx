@@ -10,7 +10,7 @@ import { useTicket } from '@/hooks/useTicket'
 const MyPurchasedEvents = () => {
     const { user } = useAuth()
     const { userTickets, getTicketByUserId } = useTicket()
-    const [loading, setLoading] = useState(true) 
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         if (user && userTickets.length === 0) {
@@ -22,22 +22,20 @@ const MyPurchasedEvents = () => {
     if (!user) {
         return (
             <div>
-                
                 <div className="flex justify-center items-center h-screen">
-              
-                   <CircularProgress size='lg' />
+                    <CircularProgress size="lg" />
                 </div>
             </div>
-        ) 
+        )
     }
 
     if (userTickets.length === 0) {
-        return <div>No tickets found.</div> 
+        return <div>No tickets found.</div>
     }
 
     return (
         <div className="bg-black flex flex-col min-h-screen w-screen p-8 gap-8">
-            {' '} 
+            {' '}
             {/* Simplified class names */}
             <div className="mb-6 flex justify-between items-center">
                 <h2 className="text-2xl">My Tickets</h2>{' '}

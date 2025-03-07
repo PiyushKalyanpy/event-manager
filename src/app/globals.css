@@ -83,7 +83,7 @@ nextjs-portal {
 }
 @layer base {
     * {
-        @apply  border-border m-0;
+        @apply  border-border m-0 outline-none;
       
     }
     body {
@@ -98,10 +98,11 @@ nextjs-portal {
     .full-page {
         @apply w-screen min-h-screen  flex;
     }
+    
 }
 
 [data-slot='input-wrapper'] {
-    background-color: #1a1a1a;
+    background-color: #0000005d;
 }
 
 .lucide {
@@ -159,4 +160,9 @@ tr{
 td, th{
     padding: 24px !important;
     border: none; 
+}
+
+.recharts-sector{
+    stroke-width: 0px !important;
+    outline: none !important;;
 }
